@@ -163,7 +163,7 @@ export default function Navbar() {
         </div>
 
         {userlogin !== null ? <nav>
-            <div className="relative bg-gray-50 dark:bg-slate-900">
+            <div className="relative hidden md:block bg-gray-50 dark:bg-slate-900">
                 <nav className="z-20 flex shrink-0 grow-0 justify-around gap-4 border-t border-gray-200 bg-white/50 p-2.5  shadow-lg backdrop-blur-lg dark:border-slate-600/60 dark:bg-slate-800/50 fixed top-2/4 -translate-y-2/4 left-6 min-h-[auto] min-w-[64px] flex-col rounded-lg border">
                     <NavLink to={'/'} className="flex h-16 w-16 flex-col items-center justify-center gap-1 text-fuchsia-900 dark:text-gray-400 hover:bg-gray-100 rounded-md hover:scale-125 duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
