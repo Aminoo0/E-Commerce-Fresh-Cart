@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { useState } from 'react'
 import style from './Navbar.module.css'
 import { useEffect } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate, useParams } from 'react-router-dom'
 import logo from './../../assets/images/logo.svg'
 import { allContext } from '../../context/ContextContainer'
 import { useQuery } from '@tanstack/react-query'
@@ -45,6 +45,10 @@ export default function Navbar() {
             navheight.classList.remove('py-1', 'bg-slate-600')
         }
     })
+
+    function goUp() {
+        window.scroll(0, 0) ;
+    }
 
     useEffect(() => {
 
@@ -156,7 +160,7 @@ export default function Navbar() {
 
         <div className="fixed bottom-0 right-0 mb-4 mr-4 z-10">
             <div>
-                <a href="#" className="bg-emerald-200 w-14 h-14 rounded-full transition-all shadow hover:shadow-lg items-center justify-center flex">
+                <a onClick={goUp} className="bg-emerald-200 w-14 h-14 rounded-full transition-all shadow hover:shadow-lg items-center justify-center flex">
                     <i className="fa-solid fa-arrow-up"></i>
                 </a>
             </div>
