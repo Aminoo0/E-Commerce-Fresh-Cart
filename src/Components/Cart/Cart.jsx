@@ -20,7 +20,7 @@ export default function Cart() {
         select: (data) => data?.data,
     })
 
-    // console.log(data);
+    console.log(data);
     async function deleteCart(productId) {
         let response = await deleteFromCart(productId)
         // console.log(response);
@@ -41,85 +41,164 @@ export default function Cart() {
     return (<>
 
         <h1 className='text-center text-5xl font-semibold text-slate-500 my-5 hover:tracking-widest duration-300'>My Cart</h1>
-
-        <div className="flex flex-col md:flex-row px-14 py-7">
-            <div className='flex flex-wrap w-full'>
-                <motion.div initial={{ y: -100, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{duration:2}} className="flex flex-col w-full md:w-2/3 mx-auto h-fit gap-4 p-4">
-                    <p className="text-blue-900 text-xl font-extrabold">Total Price</p>
-                    <div className="flex flex-col p-4 gap-4 text-lg font-semibold shadow-md border rounded-sm">
-                        <div className="flex flex-row justify-between">
-                            <p className="text-gray-600">Total Price ({data?.numOfCartItems} Items)</p>
-                            <div>
-                                <p className="text-end font-bold">{data?.data?.totalCartPrice} EGP</p>
+        
+        <section className=" relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full xl:after:w-1/3 after:top-0 after:right-0 after:bg-gray-50">
+            <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto relative z-10">
+                <div className="grid grid-cols-12">
+                    <div className="col-span-12 xl:col-span-8 lg:pr-8 pt-14 pb-8 lg:py-24 w-full max-xl:max-w-3xl max-xl:mx-auto">
+                        <div className="flex items-center justify-between pb-8 border-b border-gray-300">
+                            <h2 className="font-manrope font-bold text-3xl leading-10 text-black">Shopping Cart</h2>
+                            <h2 className="font-manrope font-bold text-xl leading-8 text-gray-600">3 Items</h2>
+                        </div>
+                        <div className="grid grid-cols-12 mt-8 max-md:hidden pb-6 border-b border-gray-200">
+                            <div className="col-span-12 md:col-span-7">
+                                <p className="font-normal text-lg leading-8 text-gray-400">Product Details</p>
+                            </div>
+                            <div className="col-span-12 md:col-span-5">
+                                <div className="grid grid-cols-5">
+                                    <div className="col-span-3">
+                                        <p className="font-normal text-lg leading-8 text-gray-400 text-center">Quantity</p>
+                                    </div>
+                                    <div className="col-span-2">
+                                        <p className="font-normal text-lg leading-8 text-gray-400 text-center">Total</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="flex gap-2">
-                            <button className="transition-colors text-sm bg-blue-600 hover:bg-blue-700 p-2 rounded-sm w-full text-white text-hover shadow-md">
-                                <Link to={'/'}>HOME</Link>
-                            </button>
-                            <button className="transition-colors text-sm bg-white border border-gray-600 p-2 rounded-sm w-full text-gray-700 text-hover shadow-md">
-                                <Link to={'/products'}> ADD MORE PRODUCTS</Link>
+                        {data?.data.products.map((product) => {
+                            return <div key={product?.product?.id} className="flex flex-col min-[500px]:flex-row min-[500px]:items-center gap-5 py-6  border-b border-gray-200 group">
+                                <div className="w-full md:max-w-[126px]">
+                                    <img src={product?.product?.imageCover} alt="perfume bottle image" className="mx-auto" />
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-4 w-full">
+                                    <div className="md:col-span-2">
+                                        <div className="flex flex-col max-[500px]:items-center gap-3">
+                                            <h6 className="font-semibold text-base leading-7 text-black">{product?.product?.title}</h6>
+                                            <h6 className="font-normal text-base leading-7 text-gray-500">{product?.product?.category?.name}</h6>
+                                            <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-indigo-600">{product?.price} EGP</h6>
+                                        </div>
+                                        <button onClick={() => deleteCart(product.product.id)} className='mt-5 text-red-400 text-3xl hover:scale-105 duration-300'><i className="fa-solid fa-trash"></i></button>
+                                    </div>
+                                    <div className="flex items-center max-[500px]:justify-center h-full max-md:mt-3">
+                                        <div className="flex items-center h-full">
+                                            <button onClick={() => updatefromCart(product.product.id, product.count - 1)} className="group rounded-l-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300">
+                                                <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black" xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 22 22" fill="none">
+                                                    <path d="M16.5 11H5.5" stroke strokeWidth="1.6" strokeLinecap="round" />
+                                                    <path d="M16.5 11H5.5" stroke strokeOpacity="0.2" strokeWidth="1.6" strokeLinecap="round" />
+                                                    <path d="M16.5 11H5.5" stroke strokeOpacity="0.2" strokeWidth="1.6" strokeLinecap="round" />
+                                                </svg>
+                                            </button>
+                                            <input value={product?.count} type="text" className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[15px]  text-center bg-transparent" placeholder={1} />
+                                            <button onClick={() => updatefromCart(product.product.id, product.count + 1)} className="group rounded-r-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300">
+                                                <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black" xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 22 22" fill="none">
+                                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke strokeWidth="1.6" strokeLinecap="round" />
+                                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke strokeOpacity="0.2" strokeWidth="1.6" strokeLinecap="round" />
+                                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke strokeOpacity="0.2" strokeWidth="1.6" strokeLinecap="round" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">
+                                        <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">{product?.price * product?.count} EGP</p>
+                                    </div>
+                                </div>
+                            </div>
+                        })}
+                        <div className="flex items-center justify-end mt-8">
+                            <button className="flex items-center px-5 py-3 rounded-full gap-2 border-none outline-0 group font-semibold text-lg leading-8 text-indigo-600 shadow-sm shadow-transparent transition-all duration-500 hover:text-indigo-700">
+                                Add Coupon Code
+                                <svg className="transition-all duration-500 group-hover:translate-x-2" xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 22 22" fill="none">
+                                    <path d="M12.7757 5.5L18.3319 11.0562M18.3319 11.0562L12.7757 16.6125M18.3319 11.0562L1.83203 11.0562" stroke="#4F46E5" strokeWidth="1.6" strokeLinecap="round" />
+                                </svg>
                             </button>
                         </div>
                     </div>
-                </motion.div>
-                {data?.data.products.map((product) => {
-                    return <motion.div initial={{ x: -100, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 1 }} key={product.product.id} className="w-full lg:w-1/2 flex flex-col h-fit gap-4 p-2">
-                        <div className="flex flex-col p-4 text-lg font-semibold shadow-md border rounded-sm bg-slate-100">
-                            <div className="flex flex-col md:flex-row gap-3 justify-between">
-                                <div className="flex flex-row gap-6 items-center">
-                                    <div className="w-28 h-28">
-                                        <img className="w-full h-full" src={product?.product?.imageCover} />
-                                    </div>
-                                    <div className="flex flex-col gap-1">
-                                        <p className="text-lg text-gray-800 font-semibold">{product?.product?.title}</p>
-                                        <p className="text-xs text-gray-600 font-semibold"><span className="font-normal">{product?.product?.category?.name}</span></p>
-                                        <p className="text-xs text-gray-600 font-semibold">Size: <span className="font-normal">42</span></p>
+                    <div className=" col-span-12 xl:col-span-4 bg-gray-50 w-full max-xl:px-6 max-w-3xl xl:max-w-lg mx-auto lg:pl-8 py-24">
+                        <h2 className="font-manrope font-bold text-3xl leading-10 text-black pb-8 border-b border-gray-300">
+                            Order Summary</h2>
+                        <div className="mt-8">
+                            <div className="flex items-center justify-between pb-6">
+                                <p className="font-normal text-lg leading-8 text-black">{data?.numOfCartItems} Items</p>
+                                <p className="font-medium text-lg leading-8 text-black">{data?.data?.totalCartPrice} EGP</p>
+                            </div>
+                            <form>
+                                <label className="flex  items-center mb-1.5 text-gray-600 text-sm font-medium">Shipping
+                                </label>
+                                <div className="flex pb-6">
+                                    <div className="relative w-full">
+                                        <div className=" absolute left-0 top-0 py-3 px-4">
+                                            <span className="font-normal text-base text-gray-300">Second Delivery</span>
+                                        </div>
+                                        <input type="text" className="block w-full h-11 pr-10 pl-36 min-[500px]:pl-52 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-gray-400" placeholder="$5.00" />
+                                        <button id="dropdown-button" data-target="dropdown-delivery" className="dropdown-toggle flex-shrink-0 z-10 inline-flex items-center py-4 px-4 text-base font-medium text-center text-gray-900 bg-transparent  absolute right-0 top-0 pl-2 " type="button">
+                                            <svg className="ml-2 my-auto" width={12} height={7} viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1.5L4.58578 5.08578C5.25245 5.75245 5.58579 6.08579 6 6.08579C6.41421 6.08579 6.74755 5.75245 7.41421 5.08579L11 1.5" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </button>
+                                        <div id="dropdown-delivery" aria-labelledby="dropdown-delivery" className="z-20 hidden divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 absolute top-10 bg-white right-0">
+                                            <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                                                <li>
+                                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Shopping</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Images</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">News</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Finance</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="self-center text-center">
-                                    <p className="text-gray-600 font-normal text-sm line-through">
-                                        <span className="text-emerald-500 ml-2">(-50% OFF)</span>
-                                    </p>
-                                    <p className="text-gray-800 font-normal text-xl">{product?.price} EGP</p>
-                                </div>
-                                <div className="self-center">
-                                    <button onClick={() => deleteCart(product.product.id)}>
-                                        <svg height="24px" width="24px" id="Layer_1" style={{ enableBackground: 'new 0 0 512 512' }} version="1.1" viewBox="0 0 512 512" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                                            <g>
-                                                <path d="M400,113.3h-80v-20c0-16.2-13.1-29.3-29.3-29.3h-69.5C205.1,64,192,77.1,192,93.3v20h-80V128h21.1l23.6,290.7   c0,16.2,13.1,29.3,29.3,29.3h141c16.2,0,29.3-13.1,29.3-29.3L379.6,128H400V113.3z M206.6,93.3c0-8.1,6.6-14.7,14.6-14.7h69.5   c8.1,0,14.6,6.6,14.6,14.7v20h-98.7V93.3z M341.6,417.9l0,0.4v0.4c0,8.1-6.6,14.7-14.6,14.7H186c-8.1,0-14.6-6.6-14.6-14.7v-0.4   l0-0.4L147.7,128h217.2L341.6,417.9z" />
-                                                <g>
-                                                    <rect height={241} width={14} x={249} y={160} />
-                                                    <polygon points="320,160 305.4,160 294.7,401 309.3,401" />
-                                                    <polygon points="206.5,160 192,160 202.7,401 217.3,401" />
-                                                </g>
-                                            </g>
+                                <label className="flex items-center mb-1.5 text-gray-400 text-sm font-medium">Promo Code
+                                </label>
+                                <div className="flex pb-4 w-full">
+                                    <div className="relative w-full ">
+                                        <div className=" absolute left-0 top-0 py-2.5 px-4 text-gray-300">
+                                        </div>
+                                        <input type="text" className="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 " placeholder="xxxx xxxx xxxx" />
+                                        <button id="dropdown-button" data-target="dropdown" className="dropdown-toggle flex-shrink-0 z-10 inline-flex items-center py-4 px-4 text-base font-medium text-center text-gray-900 bg-transparent  absolute right-0 top-0 pl-2 " type="button"><svg className="ml-2 my-auto" width={12} height={7} viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 1.5L4.58578 5.08578C5.25245 5.75245 5.58579 6.08579 6 6.08579C6.41421 6.08579 6.74755 5.75245 7.41421 5.08579L11 1.5" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
-                                    </button>
+                                        </button>
+                                        <div id="dropdown" className="absolute top-10 right-0 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                            <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                                                <li>
+                                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Shopping</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Images</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">News</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Finance</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex flex-row self-center gap-1">
-                                <button onClick={() => updatefromCart(product.product.id, product.count - 1)} className="w-5 h-5 self-center rounded-full border border-gray-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M5 12h14" />
-                                    </svg>
-                                </button>
-                                <span className='p-2'>{product?.count}</span>
-                                <button onClick={() => updatefromCart(product.product.id, product.count + 1)} className="w-5 h-5 self-center rounded-full border border-gray-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="#9ca3af" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M12 5v14M5 12h14" />
-                                    </svg>
-                                </button>
-                            </div>
+                                <div className="flex items-center border-b border-gray-200">
+                                    <button className="rounded-lg w-full bg-black py-2.5 px-4 text-white text-sm font-semibold text-center mb-8 transition-all duration-500 hover:bg-black/80">Apply</button>
+                                </div>
+                                <div className="flex items-center justify-between py-8">
+                                    <p className="font-medium text-xl leading-8 text-black">{data?.numOfCartItems} Items</p>
+                                    <p className="font-semibold text-xl leading-8 text-indigo-600">{data?.data?.totalCartPrice} EGP</p>
+                                </div>
+                                <Link to={'/paymentform'}>
+                                    <button className="w-full text-center bg-indigo-600 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700">Checkout</button>
+                                </Link>
+                            </form>
                         </div>
-                    </motion.div>
-                })}
+                    </div>
+                </div>
             </div>
-        </div>
-        <div className='text-center'>
-            <Link className='mx-auto' to={'/paymentform'}>
-                <button className='p-2 bg-emerald-400 rounded-lg mt-10'>check out sesson</button>
-            </Link>
-        </div>
+        </section>
+
+
     </>)
 }

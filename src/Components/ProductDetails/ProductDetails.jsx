@@ -169,8 +169,8 @@ export default function ProductDetails() {
                         </div>
                         <div className="flex">
                             <span className="title-font font-medium text-2xl text-gray-900">{data?.price} EGP</span>
-                            <button onClick={() => addProductToCart(data?.id)} className="flex ml-auto text-white bg-red-500 border-0 py-2 px-16 focus:outline-none hover:bg-red-600 rounded">Add To Cart</button>
-                            <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+                            <button onClick={() => addProductToCart(data?.id)} className="flex ml-auto text-white bg-red-500 border-0 py-2 px-16 focus:outline-none hover:bg-red-600 rounded duration-300">Add To Cart</button>
+                            <button className="rounded-full w-10 h-10 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4 hover:scale-105 duration-500">
                                 {likeproduct.includes(data?.id) ?
                                     <i onClick={() => deleteWishList(data?.id)} className={`fa-solid fa-heart text-red-600 text-2xl cursor-pointer`}></i>
                                     : <i onClick={() => addProductToWishList(data?.id)} className={`fa-regular fa-heart text-red-600 text-2xl cursor-pointer`}></i>

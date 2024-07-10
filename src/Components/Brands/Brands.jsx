@@ -9,19 +9,6 @@ import { motion } from 'framer-motion'
 
 export default function Brands() {
 
-    // const [allbrands, setAllBrands] = useState([])
-
-    // function getAllBrands() {
-    //     axios.get(`https://ecommerce.routemisr.com/api/v1/brands`)
-    //         .then(({ data }) => {
-    //             // console.log(data?.data);
-    //             setAllBrands(data?.data)
-    //         })
-    // }
-
-    // useEffect(() => {
-    //     getAllBrands()
-    // }, [])
 
     function getAllBrands() {
         return axios.get(`https://ecommerce.routemisr.com/api/v1/brands`)
@@ -49,7 +36,7 @@ export default function Brands() {
         </div>
         <div className='flex flex-wrap p-5 text-center'>
             {data?.data.data.map((brand) => {
-                return <motion.div initial={{ x: -100, y: -100, opacity: 0 }} whileInView={{ x: 0, y: 0, opacity: 1 }} transition={{duration:1}} key={brand._id} className='w-full md:w-1/3 xl:w-1/5 p-10'>
+                return <motion.div whileHover={{scale:1.07}} initial={{ x: -100, y: -100, opacity: 0 }} whileInView={{ x: 0, y: 0, opacity: 1 }} transition={{duration:1}} key={brand._id} className='w-full md:w-1/3 xl:w-1/5 p-10 '>
                     <Link to={`/brandproducts/${brand._id}`}>
                         <img className='rounded-3xl h-72' src={brand.image} alt="" />
                         <h2 className='text-xl font-semibold text-slate-700 mt-5'>{brand.name}</h2>

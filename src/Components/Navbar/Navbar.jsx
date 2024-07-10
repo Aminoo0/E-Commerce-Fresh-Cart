@@ -40,9 +40,9 @@ export default function Navbar() {
         let navheight = document.querySelector('nav');
         // navheight.classList.toggle('bg-slate-400', window.scrollY > navheight.offsetHeight)
         if (window.scrollY > navheight.offsetHeight) {
-            navheight.classList.add('py-1', 'bg-slate-600')
+            navheight.classList.add('py-1', 'bg-slate-200')
         } else {
-            navheight.classList.remove('py-1', 'bg-slate-600')
+            navheight.classList.remove('py-1', 'bg-slate-200')
         }
     })
 
@@ -107,43 +107,43 @@ export default function Navbar() {
 
 
 
-        <nav className="fixed top-0 left-0 right-0 flex justify-between bg-gray-500 text-white w-screen z-50 duration-500">
+        <nav className="fixed top-0 left-0 right-0 flex justify-between bg-gray-200 text-slate-600 w-screen z-50 duration-500">
             <div className="px-5 xl:px-12 py-4 flex w-full items-center justify-between">
                 <Link to={'/header'} className="text-3xl font-bold font-heading">
                     <img className="h-9" src={logo} alt="logo" />
                 </Link>
-                {userlogin !== null ? <ul className={`${showicon ? 'hidden' : 'block'} absolute top-full left-0 w-full xl:w-auto bg-emerald-300 xl:bg-transparent gap-10 xl:static xl:flex p-4 xl:p-0 px-10 mx-auto text-xl`}>
-                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-200" to={'/'}>Home</NavLink></li>
-                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-200" to={'/categories'}>Catagories</NavLink></li>
-                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-200" to={'/brands'}>Brands</NavLink></li>
-                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-200" to={'/products'}>Products</NavLink></li>
-                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-200" to={'/cart'}>Cart</NavLink></li>
-                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-200" to={'/wishlist'}>Wish List</NavLink></li>
-                </ul> : <ul className='flex gap-5 text-xl mr-10'>
-                    <li><NavLink className="hover:text-gray-200" to={'/login'}>Login</NavLink></li>
-                    <li><NavLink className="hover:text-gray-200" to={'/register'}>Register</NavLink></li>
+                {userlogin !== null ? <ul className={`${showicon ? 'hidden' : 'block'} absolute top-full left-0 w-full xl:w-auto bg-slate-100 xl:bg-transparent gap-10 xl:static xl:flex p-4 xl:p-0 px-10 mx-auto text-xl`}>
+                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-500" to={'/'}>Home</NavLink></li>
+                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-500" to={'/categories'}>Catagories</NavLink></li>
+                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-500" to={'/brands'}>Brands</NavLink></li>
+                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-500" to={'/products'}>Products</NavLink></li>
+                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-500" to={'/cart'}>Cart</NavLink></li>
+                    <li className='hover:pl-2 xl:hover:pl-0 duration-500 py-2'><NavLink className="hover:text-gray-500" to={'/wishlist'}>Wish List</NavLink></li>
+                </ul> : <ul className='flex gap-5 text-lg mr-10'>
+                    <li><NavLink className="bg-blue-700 hover:bg-blue-800 text-white py-2 px-4 rounded" to={'/login'}>Login</NavLink></li>
+                    <li><NavLink className="bg-blue-700 hover:bg-blue-800 text-white py-2 px-4 rounded" to={'/register'}>Register</NavLink></li>
                 </ul>
                 }
-                {userlogin !== null ? <div className={`${showicon ? 'hidden' : 'block'} absolute bg-emerald-300 xl:bg-transparent top-[360px] w-full xl:w-auto left-0 xl:static xl:flex xl:gap-5 p-10 xl:p-0 flex justify-between items-center`}>
-                    <Link to={'/wishlist'} className="hover:text-gray-200 relative">
+                {userlogin !== null ? <div className={`${showicon ? 'hidden' : 'block'} absolute bg-slate-200 xl:bg-transparent top-[360px] w-full xl:w-auto left-0 xl:static xl:flex xl:gap-5 p-10 xl:p-0 flex justify-between items-center`}>
+                    <Link to={'/wishlist'} className="hover:text-gray-500 relative">
                         <i className="fa-regular fa-heart text-2xl"></i>
                         <span className='absolute -top-3 flex justify-center items-center -right-2 text-xl p-3 bg-pink-500 w-5 h-5 rounded-full'>{qeury?.data?.data.data.length}</span>
                     </Link>
-                    <Link to={'/cart'} className="flex items-center relative hover:text-gray-200">
+                    <Link to={'/cart'} className="flex items-center relative hover:text-gray-500">
                         <i className="fa-brands fa-opencart text-2xl"></i>
                         <span className='absolute -top-3 flex justify-center items-center -right-2 text-xl p-3 bg-pink-500 w-5 h-5 rounded-full'>{data?.data?.numOfCartItems}</span>
                     </Link>
-                    <Link to={'/profile'} className="flex items-center hover:text-gray-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <Link to={'/profile'} className="flex items-center hover:text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </Link>
                     <ul>
-                        <li onClick={() => userLogOut()}><NavLink className="hover:text-gray-200 text-lg">Log Out</NavLink></li>
+                        <li onClick={() => userLogOut()}><Link className="hover:text-gray-500 text-lg">Log Out</Link></li>
                     </ul>
                 </div> : null}
             </div>
-            {userlogin !== null ? <Link to={'/cart'} className="xl:hidden flex mr-6 items-center" href="#">
+            {userlogin !== null ? <Link to={'/cart'} className="xl:hidden flex mr-6 items-center">
                 <i className="fa-brands fa-opencart text-2xl"></i>
                 <span className="flex absolute -mt-5 ml-4">
                     <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full opacity-100 text-yellow-400">{data?.data?.numOfCartItems}</span>
@@ -160,7 +160,7 @@ export default function Navbar() {
 
         <div className="fixed bottom-0 right-0 mb-4 mr-4 z-10">
             <div>
-                <a onClick={goUp} className="bg-emerald-200 w-14 h-14 rounded-full transition-all shadow hover:shadow-lg items-center justify-center flex">
+                <a onClick={goUp} className="bg-slate-200 w-10 h-10 rounded-full transition-all shadow hover:shadow-lg items-center justify-center flex">
                     <i className="fa-solid fa-arrow-up"></i>
                 </a>
             </div>
