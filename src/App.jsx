@@ -58,7 +58,7 @@ let router = createHashRouter([
       { path: 'resetcode', element: <ResetCode /> },
       { path: 'changepassword', element: <ChangePassword /> },
       { path: 'paymentform', element: <ProtectedRouter><PaymentForm /></ProtectedRouter> },
-      { path: 'allorders', element: <ProtectedRouter><AllOrders /></ProtectedRouter> },
+      { path: 'E-Commerce-Fresh-Cart/#/allorders', element: <ProtectedRouter><AllOrders /></ProtectedRouter> },
       { path: 'profile/settingupdatepassword', element: <ProtectedRouter><SettingUpdatePassword /></ProtectedRouter> },
       { path: 'profile/settingupdateuserdata', element: <ProtectedRouter><SettingUpdateUserData /></ProtectedRouter> },
       { path: 'register', element: <Register /> },
